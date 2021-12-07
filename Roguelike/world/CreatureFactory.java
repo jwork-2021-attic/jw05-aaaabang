@@ -47,7 +47,7 @@ public class CreatureFactory {
     }
 
     public Monster newFungus() {
-        Monster fungus = new Monster(this.world, (char)1, Configure.monsterColor, Configure.monsterHp, 10, 0, 0,this);
+        Monster fungus = new Monster(this.world, (char)1, Configure.monsterColor, Configure.monsterHp, 10, 0, 6,this);
         world.addAtEmptyLocation(fungus);
         
         exec.execute(fungus);

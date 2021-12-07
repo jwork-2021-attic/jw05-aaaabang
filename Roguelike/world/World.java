@@ -50,7 +50,9 @@ public class World {
             return tiles[x][y];
         }
     }
-    
+    public Tile[][] getTiles(){
+        return tiles;
+    }
     public void setTile(Tile tile,int x,int y){
         if (x < 0 || x >= width || y < 0 || y >= height) {
             return ;

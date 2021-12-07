@@ -78,7 +78,7 @@ public class PlayScreen implements Screen {
                 if (player.canSee(wx, wy)) {
                     terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
                 } else {
-                    terminal.write(world.glyph(wx, wy), x, y, Color.DARK_GRAY);
+                    terminal.write((char)0, x, y, Color.DARK_GRAY);
                 }
             }
         }

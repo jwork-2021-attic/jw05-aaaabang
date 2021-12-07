@@ -158,10 +158,10 @@ public class Creature implements Runnable{
     }
 
     public boolean canSee(int x, int y) {
-        // if ((x() - x) * ( x() - x) + ( y() - y) * ( y() - y) >  visionRadius()
-        //         *  visionRadius()) {
-        //     return false;
-        // }
+        if ((x() - x) * ( x() - x) + ( y() - y) * ( y() - y) >  visionRadius()
+                *  visionRadius()) {
+            return false;
+        }
         // for (Point p : new Line( x(),  y(), x, y)) {
         //     if ( tile(p.x, p.y).isGround() || (p.x == x && p.y == y)) {
         //         continue;

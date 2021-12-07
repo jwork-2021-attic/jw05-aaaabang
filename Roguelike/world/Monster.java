@@ -20,7 +20,10 @@ package world;
 import java.util.Random;
 import java.util.concurrent.*;
 
+import javax.sound.sampled.Port;
+
 import java.awt.Color;
+import java.awt.Point;
 import configuration.*;
 
 /**
@@ -45,12 +48,56 @@ public class Monster extends Creature{
         while(hp > 1){
             
             try {
-                randomStep();
+                Point playerPos = isSeePlayer();
+                if(playerPos == null)
+                    randomStep();
+                else
+                    rush(playerPos);
                 TimeUnit.SECONDS.sleep(Configure.monsterSpeed);
             } catch (InterruptedException e) {
                 
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void rush(Point playerPos) {
+        int px = playerPos.x;
+        int py = playerPos.y;
+
+        int disx = px - x;
+        int disy = py - y;
+        Random r = new Random();
+        int res = r.nextInt(2);
+        // if(disy == 0){
+        //     if(disx > 0){
+        //         moveBy(1, 0);
+        //     }else if(disx < 0){
+        //         moveBy(-1,0);
+        //     }
+        // }
+        // if(disx == 0){
+        //     if(disy > 0){
+        //         moveBy(0, 1);
+        //     }else if(disy < 0){
+        //         moveBy(0,-1);
+        //     }
+        // }
+        switch(res){
+            case 0:
+                if(disx > 0){
+                    moveBy(1, 0);
+                }else if(disx < 0){
+                    moveBy(-1,0);
+                }
+                return;
+            case 1:
+                if(disy > 0){
+                    moveBy(0, 1);
+                }else if(disy < 0){
+                    moveBy(0,-1);
+                }
+                return;
         }
     }
 
@@ -107,5 +154,29 @@ public class Monster extends Creature{
         }
     }
 
+    public Point isSeePlayer(){
+        Tile[][] tiles = this.world.getTiles();
+
+        
+
+        for (int dwidth = -1; dwidth < 2; dwidth++) {
+            for (int dheight = -1; dheight < 2; dheight++) {
+                if (this.x+ dwidth < 0 || this.x + dwidth >= Configure.GameSize || this.y + dheight < 0
+                        || this.y + dheight >= Configure.GameSize) {
+                    continue;
+                } 
+                int index_x = this.x + dwidth;
+                int index_y = this.y + dheight;
+                if(this.canSee(index_x,index_y)){
+                    Creature creature = this.world.creature(index_x, index_y);
+                    if(creature instanceof Player)
+                        return new Point(index_x, index_y);
+                }
+
+            }
+        }
+        
+        return null;
+    }
 
 }

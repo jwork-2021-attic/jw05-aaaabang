@@ -31,6 +31,7 @@ public class World {
     private int width;
     private int height;
     private List<Creature> creatures;
+    private List<Bomb> bombs;
 
     public static final int TILE_TYPES = 2;
 
@@ -39,6 +40,7 @@ public class World {
         this.width = tiles.length;
         this.height = tiles[0].length;
         this.creatures = new ArrayList<>();
+        this.bombs = new ArrayList<>();
     }
 
     public Tile tile(int x, int y) {
@@ -48,7 +50,14 @@ public class World {
             return tiles[x][y];
         }
     }
+    
+    public void setTile(Tile tile,int x,int y){
+        if (x < 0 || x >= width || y < 0 || y >= height) {
+            return ;
+        }
 
+        tiles[x][y] = tile;
+    }
     public char glyph(int x, int y) {
         return tiles[x][y].glyph();
     }
@@ -116,11 +125,34 @@ public class World {
         this.creatures.remove(target);
     }
 
+    public void remove(Bomb target) {
+        this.bombs.remove(target);
+    }
+
     public void update() {
         ArrayList<Creature> toUpdate = new ArrayList<>(this.creatures);
 
         for (Creature creature : toUpdate) {
             creature.update();
         }
+    }
+
+    public boolean isAvailablePos(int x,int y){
+        Creature creature = this.creature(x,y);
+        Tile tile = this.tile(x,y);
+        if(creature != null)
+            return false;
+        if(tile == Tile.BOUNDS || tile == Tile.WALL)
+            return false;
+            
+        return true;    
+    }
+
+    public List<Bomb> getBombs() {
+        return this.bombs;
+    }
+
+    public void addBomb(Bomb bomb){
+        this.bombs.add(bomb);
     }
 }

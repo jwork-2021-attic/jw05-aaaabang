@@ -17,6 +17,7 @@
  */
 package world;
 
+import java.util.Random;
 import java.util.concurrent.*;
 
 import java.awt.Color;
@@ -41,18 +42,15 @@ public class Monster extends Creature{
 
     @Override
     public void run(){
-        while(true){
-            //先向右走两步
-            for(int i = 0;i < 2;i++)
-            {
-                moveBy(1, 0);
+        while(hp > 1){
+            
+            try {
+                randomStep();
+                TimeUnit.SECONDS.sleep(Configure.monsterSpeed);
+            } catch (InterruptedException e) {
+                
+                e.printStackTrace();
             }
-            moveBy(0, 1);
-            for(int i = 0;i < 2;i++)
-            {
-                moveBy(-1, 0);
-            }
-            moveBy(0, -1);
         }
     }
 
@@ -63,7 +61,7 @@ public class Monster extends Creature{
     }
 
     @Override
-    public void onEnter(int x, int y, Tile tile) {
+    public synchronized void onEnter(int x, int y, Tile tile) {
         if (tile.isGround()) {
             setX(x);
             setY(y);
@@ -71,16 +69,11 @@ public class Monster extends Creature{
             dig(x, y);
         }
 
-        try {
-            TimeUnit.SECONDS.sleep(Configure.monsterSpeed);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
     }
 
     @Override
-    public synchronized int moveBy(int mx, int my) {
+    public int moveBy(int mx, int my) {
         Creature other = world.creature(x + mx, y + my);
 
         if (other == null) {
@@ -91,17 +84,28 @@ public class Monster extends Creature{
         return 0;
     }
 
-    private void spread() {
-        int newx = x() + (int) (Math.random() * 11) - 5;
-        int newy = y() + (int) (Math.random() * 11) - 5;
-
-        if (!canEnter(newx, newy)) {
-            return;
+    public void randomStep(){
+        Random r = new Random();
+        int res = r.nextInt(4);
+        switch(res){
+            case 0:
+                this.moveBy(-1, 0);
+                //System.out.println(this + " move: " + "left");
+                break;    
+            case 1:
+                this.moveBy(1, 0);
+                //System.out.println(this + " move: " + "right");
+                break;
+            case 2:
+                this.moveBy(0, -1);
+                //System.out.println(this + " move: " + "up");
+                break;
+            case 3:
+                this.moveBy(0, 1);
+                //System.out.println(this + " move: " + "down");
+                break;
         }
-
-        Creature child = this.factory.newFungus();
-        child.setX(newx);
-        child.setY(newy);
-        spreadcount++;
     }
+
+
 }

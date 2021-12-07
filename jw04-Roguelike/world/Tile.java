@@ -32,7 +32,11 @@ public enum Tile {
 
     BOUNDS('x', AsciiPanel.magenta),
 
-    GOAL((char) 3, AsciiPanel.brightRed);
+    GOAL((char) 3, AsciiPanel.brightRed),
+
+    BOMB((char)42,AsciiPanel.red),
+
+    Brick((char) 177, AsciiPanel.brightWhite);
 
     private char glyph;
 
@@ -46,12 +50,16 @@ public enum Tile {
         return color;
     }
 
+    public void setColor (Color color){
+        this.color = color;
+    }
+
     public boolean isDiggable() {
-        return this != Tile.WALL;
+        return this == Tile.Brick;
     }
 
     public boolean isGround() {
-        return this != Tile.WALL && this != Tile.BOUNDS;
+        return this == Tile.FLOOR;
     }
 
     Tile(char glyph, Color color) {

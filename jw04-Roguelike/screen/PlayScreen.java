@@ -19,6 +19,8 @@ package screen;
 
 import world.*;
 import asciiPanel.AsciiPanel;
+import configuration.Configure;
+
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -32,15 +34,15 @@ import java.util.concurrent.TimeUnit;
 public class PlayScreen implements Screen {
 
     private World world;
-    private Creature player;
+    private Player player;
     private int screenWidth;
     private int screenHeight;
     private List<String> messages;
     private List<String> oldMessages;
 
     public PlayScreen() {
-        this.screenWidth = 80;
-        this.screenHeight = 24;
+        this.screenWidth = Configure.GameSize;
+        this.screenHeight = Configure.GameSize;
         createWorld();
         this.messages = new ArrayList<String>();
         this.oldMessages = new ArrayList<String>();
@@ -52,7 +54,7 @@ public class PlayScreen implements Screen {
     private void createCreatures(CreatureFactory creatureFactory) {
         this.player = creatureFactory.newPlayer(this.messages);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < Configure.monstersCnt; i++) {
             creatureFactory.newFungus();
             try {
                 TimeUnit.MILLISECONDS.sleep(500);
@@ -80,6 +82,9 @@ public class PlayScreen implements Screen {
                 }
             }
         }
+
+        
+
         // Show creatures
         for (Creature creature : world.getCreatures()) {
             if (creature.x() >= left && creature.x() < left + screenWidth && creature.y() >= top
@@ -89,6 +94,11 @@ public class PlayScreen implements Screen {
                 }
             }
         }
+        
+        for(Bomb bomb: world.getBombs()) {
+            terminal.write(bomb.glyph(), bomb.x() - left, bomb.y() - top, bomb.color());
+        }
+
         // Creatures can choose their next action now
         world.update();
     }
@@ -96,10 +106,11 @@ public class PlayScreen implements Screen {
     private void displayMessages(AsciiPanel terminal, List<String> messages) {
         
         int top = this.screenHeight ;
+        int index = messages.size()-1;
         
-        for (int i = 0; i < messages.size(); i++) {
-            terminal.write(messages.get(i), 1, top + i + 2);
-        }
+        if(index >= 0)
+            terminal.write(messages.get(index), 1, top + 2);
+        
         //this.oldMessages.addAll(messages);
         //messages.clear();
     }
@@ -133,11 +144,18 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_DOWN:
                 flag = player.moveBy(0, 1);
                 break;
+            case KeyEvent.VK_SPACE:
+                flag = player.putBomb();
         }
-        if(flag == 1)
-        {    return new WinScreen();}
+        if(flag == 1){    
+            return new WinScreen();
+        }
+        else if(flag == -1){
+            return new LoseScreen();
+        }
         else{
-            return this;}
+            return this;
+        }
     }
 
     public int getScrollX() {

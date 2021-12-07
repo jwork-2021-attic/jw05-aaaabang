@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 import asciiPanel.AsciiPanel;
+import configuration.Configure;
 
 /**
  *
@@ -36,17 +37,17 @@ public class CreatureFactory {
         exec = Executors.newCachedThreadPool();
     }
 
-    public Creature newPlayer(List<String> messages) {
-        Player player = new Player(this.world, (char)2, AsciiPanel.brightWhite, 100, 0, 5, 9,messages);
+    public Player newPlayer(List<String> messages) {
+        Player player = new Player(this.world, (char)2, Configure.playeColor, 100, 0, 5, 9,messages);
 
-        world.setEntry(player);
+        world.addAtEmptyLocation(player);
         
         //exec.execute(player);
         return player;
     }
 
-    public Creature newFungus() {
-        Monster fungus = new Monster(this.world, (char)1, AsciiPanel.green, 10, 10, 0, 0,this);
+    public Monster newFungus() {
+        Monster fungus = new Monster(this.world, (char)1, Configure.monsterColor, Configure.monsterHp, 10, 0, 0,this);
         world.addAtEmptyLocation(fungus);
         
         exec.execute(fungus);

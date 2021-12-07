@@ -17,7 +17,12 @@
  */
 package world;
 
+
 import java.awt.Color;
+import java.awt.Point;
+import java.util.concurrent.TimeUnit;
+
+import asciiPanel.AsciiPanel;
 
 /**
  *
@@ -30,45 +35,37 @@ public class Creature implements Runnable{
     protected int y;
     protected char glyph;
     protected Color color;
-
+    protected int maxHP;
+    protected int hp;
+    protected int attackValue;
+    protected int defenseValue;
     public void setX(int x) {
         this.x = x;
     }
-
     public int x() {
         return x;
     }
-
     public void setY(int y) {
         this.y = y;
     }
-
     public int y() {
         return y;
     }
-
     public char glyph() {
         return this.glyph;
     }
-
-
-
     public Color color() {
         return this.color;
     }
-
-    private int maxHP;
-
+    public void setColor (Color color){
+        this.color = color;
+    }
     public int maxHP() {
         return this.maxHP;
     }
-
-    private int hp;
-
     public int hp() {
         return this.hp;
     }
-
     public synchronized void modifyHP(int amount) {
         this.hp += amount;
 
@@ -77,13 +74,17 @@ public class Creature implements Runnable{
         }
     }
 
-    private int attackValue;
-
+    public boolean isAlive(){
+        if (this.hp < 1) {
+            world.remove(this);
+            return false;
+        }
+        return true;
+    }
     public int attackValue() {
         return this.attackValue;
     }
-
-    private int defenseValue;
+    
 
     public int defenseValue() {
         return this.defenseValue;
@@ -107,22 +108,20 @@ public class Creature implements Runnable{
         return 0;
     }
 
-    public synchronized void attack(Creature other) {
-        int damage = Math.max(0, this.attackValue() - other.defenseValue());
-        //damage = (int) (Math.random() * damage) + 1;
+    // public synchronized void attack(Creature other) {
+    //     int damage = Math.max(0, this.attackValue() - other.defenseValue());
+    //     //damage = (int) (Math.random() * damage) + 1;
 
-        other.modifyHP(-damage);
+    //     other.modifyHP(-damage);
 
-        this.notify("You attack the '%s' for %d damage.", other.glyph, damage);
-        other.notify("The '%s' attacks you for %d damage.", glyph, damage);
-    }
+    //     this.notify("You attack the '%s' for %d damage.", other.glyph, damage);
+    //     other.notify("The '%s' attacks you for %d damage.", glyph, damage);
+    // }
 
     public void getAttack(int damage) {
         
-
         this.modifyHP(-damage);
-
-        this.notify("The monster attacks you for %d damage.", damage);
+        this.notify("you get attacked for %d damage.", damage);
     }
 
     public void update() {
@@ -159,12 +158,12 @@ public class Creature implements Runnable{
     }
 
     public boolean canSee(int x, int y) {
-        // if ((creature.x() - x) * (creature.x() - x) + (creature.y() - y) * (creature.y() - y) > creature.visionRadius()
-        //         * creature.visionRadius()) {
+        // if ((x() - x) * ( x() - x) + ( y() - y) * ( y() - y) >  visionRadius()
+        //         *  visionRadius()) {
         //     return false;
         // }
-        // for (Point p : new Line(creature.x(), creature.y(), x, y)) {
-        //     if (creature.tile(p.x, p.y).isGround() || (p.x == x && p.y == y)) {
+        // for (Point p : new Line( x(),  y(), x, y)) {
+        //     if ( tile(p.x, p.y).isGround() || (p.x == x && p.y == y)) {
         //         continue;
         //     }
         //     return false;
@@ -177,4 +176,6 @@ public class Creature implements Runnable{
         // TODO Auto-generated method stub
         
     }
+
+    
 }

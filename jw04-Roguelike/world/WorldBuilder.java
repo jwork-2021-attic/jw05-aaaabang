@@ -47,13 +47,15 @@ public class WorldBuilder {
                     continue;
                 }
                 Random rand = new Random();
-                //rand.nextInt(World.TILE_TYPES)
-                switch (0) {
+                switch (rand.nextInt(5)) {
                     case 0:
-                        tiles[width][height] = Tile.FLOOR;
-                        break;
                     case 1:
                         tiles[width][height] = Tile.WALL;
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                        tiles[width][height] = Tile.FLOOR;
                         break;
                 }
             }
@@ -62,18 +64,22 @@ public class WorldBuilder {
         return this;
     }
 
-    private WorldBuilder smooth(int factor) {
+    private  WorldBuilder smooth(int factor){
         Tile[][] newtemp = new Tile[width][height];
         if (factor > 1) {
-            smooth(factor - 1);
-        }
+                smooth(factor - 1);
+            }
         for (int width = 0; width < this.width; width++) {
             for (int height = 0; height < this.height; height++) {
-                // Surrounding walls and floor
+                if(width == 0 || width == this.width-1 || height == 0 || height == this.height - 1){
+                    newtemp[width][height] = Tile.BOUNDS;
+                    continue;
+                }
+                
+                //Surrounding walls and floor
                 int surrwalls = 0;
                 int surrfloor = 0;
-
-                // Check the tiles in a 3x3 area around center tile
+                //Check the tiles in a 3x3 area around center tile
                 for (int dwidth = -1; dwidth < 2; dwidth++) {
                     for (int dheight = -1; dheight < 2; dheight++) {
                         if (width + dwidth < 0 || width + dwidth >= this.width || height + dheight < 0
@@ -81,25 +87,67 @@ public class WorldBuilder {
                             continue;
                         } else if (tiles[width + dwidth][height + dheight] == Tile.FLOOR) {
                             surrfloor++;
-                        } else if (tiles[width + dwidth][height + dheight] == Tile.WALL) {
+                        } else if (tiles[width + dwidth][height + dheight] != Tile.FLOOR) {
                             surrwalls++;
                         }
                     }
                 }
+
                 Tile replacement;
-                if (surrwalls > surrfloor) {
-                    replacement = Tile.WALL;
-                } else {
+                if (surrwalls < surrfloor) {
                     replacement = Tile.FLOOR;
+                } else {
+                    replacement = Tile.WALL;
                 }
                 newtemp[width][height] = replacement;
             }
+            
         }
         tiles = newtemp;
+        newtemp[width-2][height-2] = Tile.GOAL;
+        
         return this;
+        
     }
 
+    // private WorldBuilder smooth(int factor) {
+    //     Tile[][] newtemp = new Tile[width][height];
+    //     if (factor > 1) {
+    //         smooth(factor - 1);
+    //     }
+    //     for (int width = 0; width < this.width; width++) {
+    //         for (int height = 0; height < this.height; height++) {
+    //             // Surrounding walls and floor
+    //             int surrwalls = 0;
+    //             int surrfloor = 0;
+
+    //             // Check the tiles in a 3x3 area around center tile
+    //             for (int dwidth = -1; dwidth < 2; dwidth++) {
+    //                 for (int dheight = -1; dheight < 2; dheight++) {
+    //                     if (width + dwidth < 0 || width + dwidth >= this.width || height + dheight < 0
+    //                             || height + dheight >= this.height) {
+    //                         continue;
+    //                     } else if (tiles[width + dwidth][height + dheight] == Tile.FLOOR) {
+    //                         surrfloor++;
+    //                     } else if (tiles[width + dwidth][height + dheight] == Tile.WALL) {
+    //                         surrwalls++;
+    //                     }
+    //                 }
+    //             }
+    //             Tile replacement;
+    //             if (surrwalls > surrfloor) {
+    //                 replacement = Tile.FLOOR;
+    //             } else {
+    //                 replacement = Tile.WALL;
+    //             }
+    //             newtemp[width][height] = replacement;
+    //         }
+    //     }
+    //     tiles = newtemp;
+    //     return this;
+    // }
+
     public WorldBuilder makeCaves() {
-        return randomizeTiles();//smooth(8);
+        return randomizeTiles().smooth(3);
     }
 }

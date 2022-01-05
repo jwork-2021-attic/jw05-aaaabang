@@ -17,6 +17,7 @@
  */
 package com.jwork.aaaabang.world;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -26,10 +27,10 @@ import com.jwork.aaaabang.configuration.Configure;
  *
  * @author Aeranythe Echosong
  */
-public class CreatureFactory {
+public class CreatureFactory implements java.io.Serializable{
 
-    private World world;
-    ExecutorService exec;
+    private transient World world;
+    transient ExecutorService exec;
 
     public CreatureFactory(World world) {
         this.world = world;

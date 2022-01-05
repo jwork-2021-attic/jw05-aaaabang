@@ -24,7 +24,7 @@ import java.awt.Color;
  *
  * @author Aeranythe Echosong
  */
-public enum Tile {
+public enum Tile implements java.io.Serializable{
 
     FLOOR((char) 250, AsciiPanel.green),
 

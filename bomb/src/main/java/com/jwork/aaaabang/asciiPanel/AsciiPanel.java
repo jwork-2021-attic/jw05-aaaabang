@@ -387,6 +387,7 @@ public class AsciiPanel extends JPanel {
 
     private void loadGlyphs() {
         try {
+            System.out.println(terminalFontFile);
             glyphSprite = ImageIO.read(AsciiPanel.class.getClassLoader().getResource(terminalFontFile));
         } catch (IOException e) {
             System.err.println("loadGlyphs(): " + e.getMessage());

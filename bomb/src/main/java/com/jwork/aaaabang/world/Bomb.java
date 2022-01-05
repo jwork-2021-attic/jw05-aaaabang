@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.jwork.aaaabang.configuration.Configure;
 
-public class Bomb implements Runnable{
+public class Bomb implements Runnable ,java.io.Serializable{
     private World world;
     private int x;
     protected int y;

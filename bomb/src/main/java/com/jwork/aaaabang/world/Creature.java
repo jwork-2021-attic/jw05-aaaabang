@@ -19,14 +19,13 @@ package com.jwork.aaaabang.world;
 
 
 import java.awt.Color;
-import java.awt.Point;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  *
  * @author Aeranythe Echosong
  */
-public class Creature implements Runnable{
+public class Creature implements Runnable,java.io.Serializable{
 
     protected World world;
     protected int x;

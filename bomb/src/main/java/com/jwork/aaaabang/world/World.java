@@ -25,16 +25,23 @@ import java.util.List;
  *
  * @author Aeranythe Echosong
  */
-public class World {
+public class World implements java.io.Serializable{
 
     private Tile[][] tiles;
     private int width;
     private int height;
     private List<Creature> creatures;
     private List<Bomb> bombs;
+    private Player player;
 
     public static final int TILE_TYPES = 2;
 
+    public void setPlayer(Player player){
+        this.player = player;
+    }
+    public Player getPlayer(){
+        return this.player;
+    }
     public World(Tile[][] tiles) {
         this.tiles = tiles;
         this.width = tiles.length;

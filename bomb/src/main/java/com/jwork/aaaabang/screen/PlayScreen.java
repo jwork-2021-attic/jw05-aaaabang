@@ -23,12 +23,15 @@ import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+
+
+import javax.xml.namespace.QName;
 
 import com.jwork.aaaabang.asciiPanel.AsciiPanel;
 import com.jwork.aaaabang.configuration.*;
 import com.jwork.aaaabang.world.*;
-
+import java.io.*;
 
 
 
@@ -46,20 +49,58 @@ public class PlayScreen implements Screen {
     private List<String> messages;
     private List<String> oldMessages;
 
-    public PlayScreen() {
+    public PlayScreen(KeyEvent key) {
         this.screenWidth = Configure.GameSize;
         this.screenHeight = Configure.GameSize;
-        createWorld();
+        
         this.messages = new ArrayList<String>();
         this.oldMessages = new ArrayList<String>();
+        createWorld();
+        switch (key.getKeyCode()) {
+            case KeyEvent.VK_ENTER:
+                newGame();
+                break;
+            case KeyEvent.VK_SPACE:
+                loadGame();
+                break;
+        }
+        
+    }
+    private void loadGame(){
+        try(
+            // 创建一个ObjectInputStream输入流
+            ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("object.txt")))
+        {
+            // 从输入流中读取一个Java对象，并将其强制类型转换为World类
+            this.world = (World)ois.readObject();
+            player = world.getPlayer();
+            ExecutorService exec = Executors.newCachedThreadPool();
+            for(Creature c : world.getCreatures()){
+                try {
+                    TimeUnit.MILLISECONDS.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                exec.execute(c);
+            }
 
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    private void newGame(){
+       
+        
         CreatureFactory creatureFactory = new CreatureFactory(this.world);
         createCreatures(creatureFactory);
     }
 
     private void createCreatures(CreatureFactory creatureFactory) {
         this.player = creatureFactory.newPlayer(this.messages);
-
+        this.world.setPlayer(this.player);
         for (int i = 0; i < Configure.monstersCnt; i++) {
             creatureFactory.newFungus();
             try {
@@ -152,6 +193,10 @@ public class PlayScreen implements Screen {
                 break;
             case KeyEvent.VK_SPACE:
                 flag = player.putBomb();
+                break;
+            case KeyEvent.VK_ENTER:
+                saveGame();
+            
         }
         if(flag == 1){    
             return new WinScreen();
@@ -161,6 +206,22 @@ public class PlayScreen implements Screen {
         }
         else{
             return this;
+        }
+    }
+
+    private void saveGame(){
+        try(
+            // 创建一个ObjectOutputStream输出流
+            ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("object.txt")))
+        {
+            // 将player对象写入输出流
+            //oos.writeObject(player);
+            oos.writeObject(world);
+        }
+        catch (IOException ex)
+        {
+            ex.printStackTrace();
         }
     }
 

@@ -28,14 +28,14 @@
   </dependencies>
 
   <build>
-    <configuration>
+    <!-- <configuration>
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
               <mainClass>com.jwork.aaaabang.ApplicationMain</mainClass>
             </manifest>
           </archive>
-    </configuration>
+    </configuration> -->
 
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>

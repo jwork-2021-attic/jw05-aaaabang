@@ -7,6 +7,8 @@ public class Configure {
     public static long refreshTime = 50;//MILLISECONDS
     public static int GameSize = 30;
 
+    public static int worldWidth = 50;
+    public static int worldHeight = 50;
 
     // public static Color TILE_FLColor = AsciiPanel.black;
     // public static Color TILE_WLColor = AsciiPanel.brightBlack;

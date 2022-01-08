@@ -59,17 +59,7 @@ public class Player extends Creature {
         return 0;
         
         
-    }
-
-    // @Override
-    // public synchronized void getAttack(int damage) {
-        
-
-    //     this.modifyHP(-damage);
-
-    //     this.notify(" you get attacked for %d damage.", damage);
-    // }
-   
+    }   
 
     public void onEnter(int x, int y, Tile tile) {
         if (tile.isGround()) {
@@ -85,7 +75,7 @@ public class Player extends Creature {
         this.messages.add(message);
     }
 
-    public synchronized int  putBomb() {
+    public synchronized Bomb putBomb() {
         Bomb bomb = new Bomb(this.world, (char)7, AsciiPanel.brightRed, 2,Configure.bombAttack);
         
         bomb.setX(x);
@@ -94,6 +84,6 @@ public class Player extends Creature {
         this.notify("choose next step.");
         
         new Thread(bomb).start();
-        return 0;
+        return bomb;
     }
 }

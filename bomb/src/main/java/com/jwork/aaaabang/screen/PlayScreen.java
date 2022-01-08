@@ -49,14 +49,14 @@ public class PlayScreen implements Screen {
     private List<String> messages;
     private List<String> oldMessages;
 
-    public PlayScreen(KeyEvent key) {
+    public PlayScreen(int keyType) {
         this.screenWidth = Configure.GameSize;
         this.screenHeight = Configure.GameSize;
         
         this.messages = new ArrayList<String>();
         this.oldMessages = new ArrayList<String>();
         createWorld();
-        switch (key.getKeyCode()) {
+        switch (keyType) {
             case KeyEvent.VK_ENTER:
                 newGame();
                 break;
@@ -192,7 +192,7 @@ public class PlayScreen implements Screen {
                 flag = player.moveBy(0, 1);
                 break;
             case KeyEvent.VK_SPACE:
-                flag = player.putBomb();
+                player.putBomb();
                 break;
             case KeyEvent.VK_ENTER:
                 saveGame();
@@ -209,7 +209,7 @@ public class PlayScreen implements Screen {
         }
     }
 
-    private void saveGame(){
+    public void saveGame(){
         try(
             // 创建一个ObjectOutputStream输出流
             ObjectOutputStream oos = new ObjectOutputStream(

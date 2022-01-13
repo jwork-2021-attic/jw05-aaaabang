@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jwork.aaaabang.AppTest" time="0.077" tests="2" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jwork.aaaabang.ScreenTest" time="12.726" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -17,7 +17,7 @@
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire/surefirebooter7175885343490898585.jar /Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire 2022-01-05T19-56-32_694-jvmRun1 surefire8287719392731332046tmp surefire_02986532722641381131tmp"/>
+    <property name="sun.java.command" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire/surefirebooter7177701508552131467.jar /Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire 2022-01-08T17-05-59_792-jvmRun1 surefire2000897925871913584tmp surefire_05359665501337592243tmp"/>
     <property name="surefire.test.class.path" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/test-classes:/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/classes:/Users/aaaabang/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/aaaabang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/aaaabang"/>
@@ -30,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire/surefirebooter7175885343490898585.jar"/>
+    <property name="surefire.real.class.path" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire/surefirebooter7177701508552131467.jar:/Users/aaaabang/.m2/repository/org/jacoco/org.jacoco.agent/0.8.2/org.jacoco.agent-0.8.2-runtime.jar"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="1.8.0_231-b11"/>
@@ -58,14 +58,6 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.jwork.aaaabang.AppTest" time="0.002"/>
-  <testcase name="walkPlayer" classname="com.jwork.aaaabang.AppTest" time="0.009">
-    <error message="Unresolved compilation problems: &#10;	ApplicationMain cannot be resolved to a type&#10;	ApplicationMain cannot be resolved to a type&#10;" type="java.lang.Error">java.lang.Error: 
-Unresolved compilation problems: 
-	ApplicationMain cannot be resolved to a type
-	ApplicationMain cannot be resolved to a type
-
-	at com.jwork.aaaabang.AppTest.walkPlayer(AppTest.java:32)
-</error>
-  </testcase>
+  <testcase name="testSave" classname="com.jwork.aaaabang.ScreenTest" time="8.673"/>
+  <testcase name="testScreen" classname="com.jwork.aaaabang.ScreenTest" time="4.045"/>
 </testsuite>

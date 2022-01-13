@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Line.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bomb</a> &gt; <a href="index.source.html" class="el_package">com.jwork.aaaabang.world</a> &gt; <span class="el_source">Line.java</span></div><h1>Line.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Winterstorm
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+package com.jwork.aaaabang.world;
+
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ *
+ * @author Winterstorm
+ */
+public class Line implements Iterable&lt;Point&gt; {
+
+    private List&lt;Point&gt; points;
+
+    public List&lt;Point&gt; getPoints() {
+<span class="nc" id="L34">        return this.points;</span>
+    }
+
+    public Line(Point p1, Point p2) {
+<span class="nc" id="L38">        this(p1.x, p1.y, p2.x, p2.y);</span>
+<span class="nc" id="L39">    }</span>
+
+<span class="nc" id="L41">    public Line(int x0, int y0, int x1, int y1) {</span>
+<span class="nc" id="L42">        this.points = new ArrayList&lt;Point&gt;();</span>
+
+<span class="nc" id="L44">        int dx = Math.abs(x1 - x0);</span>
+<span class="nc" id="L45">        int dy = Math.abs(y1 - y0);</span>
+
+<span class="nc bnc" id="L47" title="All 2 branches missed.">        int sx = x0 &lt; x1 ? 1 : -1;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        int sy = y0 &lt; y1 ? 1 : -1;</span>
+<span class="nc" id="L49">        int err = dx - dy;</span>
+
+        while (true) {
+<span class="nc" id="L52">            this.points.add(new Point(x0, y0));</span>
+<span class="nc bnc" id="L53" title="All 4 branches missed.">            if (x0 == x1 || y0 == y1) {</span>
+<span class="nc" id="L54">                break;</span>
+            }
+
+<span class="nc" id="L57">            int e2 = err * 2;</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            if (e2 &gt; -dy) {</span>
+<span class="nc" id="L59">                err -= dy;</span>
+<span class="nc" id="L60">                x0 += sx;</span>
+            }
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (e2 &lt; dx) {</span>
+<span class="nc" id="L63">                err += dx;</span>
+<span class="nc" id="L64">                y0 += sy;</span>
+            }
+<span class="nc" id="L66">        }</span>
+        ;
+<span class="nc" id="L68">    }</span>
+
+    public Iterator&lt;Point&gt; iterator() {
+<span class="nc" id="L71">        return points.iterator();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

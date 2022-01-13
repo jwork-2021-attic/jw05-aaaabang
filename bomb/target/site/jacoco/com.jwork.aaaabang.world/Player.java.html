@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Player.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bomb</a> &gt; <a href="index.source.html" class="el_package">com.jwork.aaaabang.world</a> &gt; <span class="el_source">Player.java</span></div><h1>Player.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Aeranythe Echosong
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+package com.jwork.aaaabang.world;
+
+import java.awt.Color;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import com.jwork.aaaabang.asciiPanel.AsciiPanel;
+import com.jwork.aaaabang.configuration.Configure;
+
+/**
+ *
+ * @author Aeranythe Echosong
+ */
+public class Player extends Creature {
+
+    private List&lt;String&gt; messages;
+
+    public Player(World world, char glyph, Color color, int maxHP, int attack, int defense, int visionRadius,List&lt;String&gt; messages) {
+<span class="fc" id="L36">        super(world, glyph, color, maxHP, attack, defense, visionRadius);</span>
+<span class="fc" id="L37">        this.messages = messages;</span>
+<span class="fc" id="L38">    }</span>
+    @Override
+    public void run(){
+        
+<span class="fc" id="L42">    }</span>
+
+    @Override
+    public synchronized int moveBy(int mx, int my) {
+<span class="fc" id="L46">        Tile tile = world.tile(x + mx, y + my);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if(tile == Tile.GOAL){</span>
+<span class="nc" id="L48">            onEnter(x + mx, y + my, world.tile(x + mx, y + my));</span>
+<span class="nc" id="L49">            return 1;</span>
+        }
+
+<span class="fc" id="L52">        Creature other = world.creature(x + mx, y + my);</span>
+
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (other == null) {</span>
+<span class="fc" id="L55">            onEnter(x + mx, y + my, world.tile(x + mx, y + my));</span>
+        } else {
+<span class="nc" id="L57">            this.getAttack(other.attackValue()-this.defenseValue());</span>
+        }
+<span class="fc" id="L59">        return 0;</span>
+        
+        
+    }   
+
+    public void onEnter(int x, int y, Tile tile) {
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if (tile.isGround()) {</span>
+<span class="fc" id="L66">            setX(x);</span>
+<span class="fc" id="L67">            setY(y);</span>
+        }
+        // else if (tile.isDiggable()) {
+        //     dig(x, y);
+        // }
+<span class="fc" id="L72">    }</span>
+
+    public void onNotify(String message) {
+<span class="fc" id="L75">        this.messages.add(message);</span>
+<span class="fc" id="L76">    }</span>
+
+    public synchronized Bomb putBomb() {
+<span class="fc" id="L79">        Bomb bomb = new Bomb(this.world, (char)7, AsciiPanel.brightRed, 2,Configure.bombAttack);</span>
+        
+<span class="fc" id="L81">        bomb.setX(x);</span>
+<span class="fc" id="L82">        bomb.setY(y);</span>
+<span class="fc" id="L83">        this.world.addBomb(bomb);</span>
+<span class="fc" id="L84">        this.notify(&quot;choose next step.&quot;);</span>
+        
+<span class="fc" id="L86">        new Thread(bomb).start();</span>
+<span class="fc" id="L87">        return bomb;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Server",
+            "request": "launch",
+            "mainClass": "com.jwork.aaaabang.nio.Server",
+            "projectName": "bomb"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

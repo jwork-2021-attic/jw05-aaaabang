@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Creature.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bomb</a> &gt; <a href="index.source.html" class="el_package">com.jwork.aaaabang.world</a> &gt; <span class="el_source">Creature.java</span></div><h1>Creature.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Aeranythe Echosong
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+package com.jwork.aaaabang.world;
+
+
+import java.awt.Color;
+
+
+/**
+ *
+ * @author Aeranythe Echosong
+ */
+public class Creature implements Runnable,java.io.Serializable{
+
+    protected World world;
+    protected int x;
+    protected int y;
+    protected char glyph;
+    protected Color color;
+    protected int maxHP;
+    protected int hp;
+    protected int attackValue;
+    protected int defenseValue;
+    public void setX(int x) {
+<span class="fc" id="L40">        this.x = x;</span>
+<span class="fc" id="L41">    }</span>
+    public int x() {
+<span class="fc" id="L43">        return x;</span>
+    }
+    public void setY(int y) {
+<span class="fc" id="L46">        this.y = y;</span>
+<span class="fc" id="L47">    }</span>
+    public int y() {
+<span class="fc" id="L49">        return y;</span>
+    }
+    public char glyph() {
+<span class="nc" id="L52">        return this.glyph;</span>
+    }
+    public Color color() {
+<span class="nc" id="L55">        return this.color;</span>
+    }
+    public void setColor (Color color){
+<span class="nc" id="L58">        this.color = color;</span>
+<span class="nc" id="L59">    }</span>
+    public int maxHP() {
+<span class="fc" id="L61">        return this.maxHP;</span>
+    }
+    public int hp() {
+<span class="fc" id="L64">        return this.hp;</span>
+    }
+    public synchronized void modifyHP(int amount) {
+<span class="fc" id="L67">        this.hp += amount;</span>
+
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (this.hp &lt; 1) {</span>
+<span class="nc" id="L70">            world.remove(this);</span>
+        }
+<span class="fc" id="L72">    }</span>
+
+    public boolean isAlive(){
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (this.hp &lt; 1) {</span>
+<span class="nc" id="L76">            world.remove(this);</span>
+<span class="nc" id="L77">            return false;</span>
+        }
+<span class="nc" id="L79">        return true;</span>
+    }
+    public int attackValue() {
+<span class="nc" id="L82">        return this.attackValue;</span>
+    }
+    
+
+    public int defenseValue() {
+<span class="nc" id="L87">        return this.defenseValue;</span>
+    }
+
+    private int visionRadius;
+
+    public int visionRadius() {
+<span class="fc" id="L93">        return this.visionRadius;</span>
+    }
+
+    public Tile tile(int wx, int wy) {
+<span class="nc" id="L97">        return world.tile(wx, wy);</span>
+    }
+
+    public void dig(int wx, int wy) {
+<span class="nc" id="L101">        world.dig(wx, wy);</span>
+<span class="nc" id="L102">    }</span>
+
+    public synchronized int moveBy(int mx, int my) {
+<span class="nc" id="L105">        return 0;</span>
+    }
+
+    // public synchronized void attack(Creature other) {
+    //     int damage = Math.max(0, this.attackValue() - other.defenseValue());
+    //     //damage = (int) (Math.random() * damage) + 1;
+
+    //     other.modifyHP(-damage);
+
+    //     this.notify(&quot;You attack the '%s' for %d damage.&quot;, other.glyph, damage);
+    //     other.notify(&quot;The '%s' attacks you for %d damage.&quot;, glyph, damage);
+    // }
+
+    public void getAttack(int damage) {
+        
+<span class="fc" id="L120">        this.modifyHP(-damage);</span>
+<span class="fc" id="L121">        this.notify(&quot;you get attacked for %d damage.&quot;, damage);</span>
+<span class="fc" id="L122">    }</span>
+
+    public void update() {
+<span class="nc" id="L125">        this.onUpdate();</span>
+<span class="nc" id="L126">    }</span>
+
+    public boolean canEnter(int x, int y) {
+<span class="nc" id="L129">        return world.tile(x, y).isGround();</span>
+    }
+
+    public void notify(String message, Object... params) {
+<span class="fc" id="L133">        this.onNotify(String.format(message, params));</span>
+<span class="fc" id="L134">    }</span>
+
+<span class="fc" id="L136">    public Creature(World world, char glyph, Color color, int maxHP, int attack, int defense, int visionRadius) {</span>
+<span class="fc" id="L137">        this.world = world;</span>
+<span class="fc" id="L138">        this.glyph = glyph;</span>
+<span class="fc" id="L139">        this.color = color;</span>
+<span class="fc" id="L140">        this.maxHP = maxHP;</span>
+<span class="fc" id="L141">        this.hp = maxHP;</span>
+<span class="fc" id="L142">        this.attackValue = attack;</span>
+<span class="fc" id="L143">        this.defenseValue = defense;</span>
+<span class="fc" id="L144">        this.visionRadius = visionRadius;</span>
+<span class="fc" id="L145">    }</span>
+
+    public void onEnter(int x, int y, Tile tile) {
+
+<span class="nc" id="L149">    }</span>
+
+    public void onUpdate() {
+<span class="nc" id="L152">    }</span>
+
+    public void onNotify(String message) {
+<span class="nc" id="L155">    }</span>
+
+    public boolean canSee(int x, int y) {
+<span class="fc" id="L158">        if ((x() - x) * ( x() - x) + ( y() - y) * ( y() - y) &gt;  visionRadius()</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">                *  visionRadius()) {</span>
+<span class="nc" id="L160">            return false;</span>
+        }
+        // for (Point p : new Line( x(),  y(), x, y)) {
+        //     if ( tile(p.x, p.y).isGround() || (p.x == x &amp;&amp; p.y == y)) {
+        //         continue;
+        //     }
+        //     return false;
+        // }
+<span class="fc" id="L168">        return true;</span>
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        
+<span class="nc" id="L175">    }</span>
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

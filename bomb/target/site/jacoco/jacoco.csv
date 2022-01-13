@@ -1,0 +1,21 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+bomb,com.jwork.aaaabang.asciiPanel,AsciiFont,85,0,0,0,17,0,5,0,5,0
+bomb,com.jwork.aaaabang.asciiPanel,AsciiCharacterData,3,0,0,0,1,0,1,0,1,0
+bomb,com.jwork.aaaabang.asciiPanel,AsciiPanel,2346,113,238,0,303,16,163,1,44,1
+bomb,com.jwork.aaaabang.screen,StartScreen,13,3,0,0,3,1,1,1,1,1
+bomb,com.jwork.aaaabang.screen,RestartScreen,11,3,2,0,3,1,2,1,1,1
+bomb,com.jwork.aaaabang.screen,WinScreen,7,3,0,0,2,1,1,1,1,1
+bomb,com.jwork.aaaabang.screen,LoseScreen,7,3,0,0,2,1,1,1,1,1
+bomb,com.jwork.aaaabang.screen,PlayScreen,331,136,34,6,57,40,26,9,6,6
+bomb,com.jwork.aaaabang,ApplicationMain,68,0,0,0,22,0,6,0,6,0
+bomb,com.jwork.aaaabang,ApplicationMain.new Runnable() {...},16,0,0,0,6,0,2,0,2,0
+bomb,com.jwork.aaaabang.world,Player,30,117,3,3,3,23,3,6,0,6
+bomb,com.jwork.aaaabang.world,Monster,86,189,22,20,27,42,19,13,2,7
+bomb,com.jwork.aaaabang.world,WorldBuilder,1,253,6,41,1,43,6,23,0,5
+bomb,com.jwork.aaaabang.world,Bomb,31,194,6,18,9,44,10,13,4,7
+bomb,com.jwork.aaaabang.world,CreatureFactory,0,51,0,0,0,11,0,3,0,3
+bomb,com.jwork.aaaabang.world,Line,98,0,12,0,23,0,10,0,4,0
+bomb,com.jwork.aaaabang.world,Creature,62,109,4,2,23,30,18,12,15,12
+bomb,com.jwork.aaaabang.world,World,112,154,19,17,30,34,23,16,9,12
+bomb,com.jwork.aaaabang.world,Tile,12,99,1,3,4,13,4,5,3,4
+bomb,com.jwork.aaaabang.configuration,Configure,3,23,0,0,1,11,1,1,1,1

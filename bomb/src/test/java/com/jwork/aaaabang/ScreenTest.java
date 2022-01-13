@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.*;
 
 import java.awt.event.KeyEvent;
-
+import java.io.IOException;
 import java.util.*;
 
 
@@ -26,7 +26,12 @@ public class ScreenTest {
 
     @Test
     public void testScreen(){
-        screen = new PlayScreen(KeyEvent.VK_ENTER);//new game
+        try {
+            screen = new PlayScreen(KeyEvent.VK_ENTER);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }//new game
         assertTrue(screen instanceof PlayScreen);
 
      
@@ -35,7 +40,7 @@ public class ScreenTest {
     }
 
     @Test
-    public void testSave(){
+    public void testSave() throws IOException{
         screen = new PlayScreen(KeyEvent.VK_ENTER);//new game
         assertTrue(screen instanceof PlayScreen);
         ((PlayScreen) screen).saveGame();

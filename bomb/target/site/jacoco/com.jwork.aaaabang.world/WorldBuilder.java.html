@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorldBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bomb</a> &gt; <a href="index.source.html" class="el_package">com.jwork.aaaabang.world</a> &gt; <span class="el_source">WorldBuilder.java</span></div><h1>WorldBuilder.java</h1><pre class="source lang-java linenums">package com.jwork.aaaabang.world;
+
+import java.util.Random;
+
+/*
+ * Copyright (C) 2015 s-zhouj
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+/**
+ *
+ * @author s-zhouj
+ */
+public class WorldBuilder {
+
+    private int width;
+    private int height;
+    private Tile[][] tiles;
+
+<span class="fc" id="L32">    public WorldBuilder(int width, int height) {</span>
+<span class="fc" id="L33">        this.width = width;</span>
+<span class="fc" id="L34">        this.height = height;</span>
+<span class="fc" id="L35">        this.tiles = new Tile[width][height];</span>
+<span class="fc" id="L36">    }</span>
+
+    public World build() {
+<span class="fc" id="L39">        return new World(tiles);</span>
+    }
+
+    private WorldBuilder randomizeTiles() {
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (int width = 0; width &lt; this.width; width++) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for (int height = 0; height &lt; this.height; height++) {</span>
+<span class="fc bfc" id="L45" title="All 8 branches covered.">                if(width == 0 || width == this.width-1 || height == 0 || height == this.height - 1){</span>
+<span class="fc" id="L46">                    tiles[width][height] = Tile.BOUNDS;</span>
+<span class="fc" id="L47">                    continue;</span>
+                }
+<span class="fc" id="L49">                Random rand = new Random();</span>
+<span class="pc bpc" id="L50" title="1 of 3 branches missed.">                switch (rand.nextInt(5)) {</span>
+                    case 0:
+                    case 1:
+<span class="fc" id="L53">                        tiles[width][height] = Tile.WALL;</span>
+<span class="fc" id="L54">                        break;</span>
+                    case 2:
+                    case 3:
+                    case 4:
+<span class="fc" id="L58">                        tiles[width][height] = Tile.FLOOR;</span>
+                        break;
+                }
+            }
+        }
+<span class="fc" id="L63">        tiles[width-2][height-2] = Tile.GOAL;</span>
+<span class="fc" id="L64">        return this;</span>
+    }
+
+    private  WorldBuilder smooth(int factor){
+<span class="fc" id="L68">        Tile[][] newtemp = new Tile[width][height];</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (factor &gt; 1) {</span>
+<span class="fc" id="L70">                smooth(factor - 1);</span>
+            }
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (int width = 0; width &lt; this.width; width++) {</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            for (int height = 0; height &lt; this.height; height++) {</span>
+<span class="fc bfc" id="L74" title="All 8 branches covered.">                if(width == 0 || width == this.width-1 || height == 0 || height == this.height - 1){</span>
+<span class="fc" id="L75">                    newtemp[width][height] = Tile.BOUNDS;</span>
+<span class="fc" id="L76">                    continue;</span>
+                }
+                
+                //Surrounding walls and floor
+<span class="fc" id="L80">                int surrwalls = 0;</span>
+<span class="fc" id="L81">                int surrfloor = 0;</span>
+                //Check the tiles in a 3x3 area around center tile
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                for (int dwidth = -1; dwidth &lt; 2; dwidth++) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">                    for (int dheight = -1; dheight &lt; 2; dheight++) {</span>
+<span class="pc bpc" id="L85" title="4 of 8 branches missed.">                        if (width + dwidth &lt; 0 || width + dwidth &gt;= this.width || height + dheight &lt; 0</span>
+                                || height + dheight &gt;= this.height) {
+<span class="nc" id="L87">                            continue;</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">                        } else if (tiles[width + dwidth][height + dheight] == Tile.FLOOR) {</span>
+<span class="fc" id="L89">                            surrfloor++;</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">                        } else if (tiles[width + dwidth][height + dheight] != Tile.FLOOR) {</span>
+<span class="fc" id="L91">                            surrwalls++;</span>
+                        }
+                    }
+                }
+
+                Tile replacement;
+<span class="fc bfc" id="L97" title="All 2 branches covered.">                if (surrwalls &lt; surrfloor) {</span>
+<span class="fc" id="L98">                    replacement = Tile.FLOOR;</span>
+                } else {
+<span class="fc" id="L100">                    replacement = Tile.WALL;</span>
+                }
+<span class="fc" id="L102">                newtemp[width][height] = replacement;</span>
+            }
+            
+        }
+<span class="fc" id="L106">        tiles = newtemp;</span>
+<span class="fc" id="L107">        newtemp[width-2][height-2] = Tile.GOAL;</span>
+        
+<span class="fc" id="L109">        return this;</span>
+        
+    }
+
+
+
+    public WorldBuilder makeCaves() {
+<span class="fc" id="L116">        return randomizeTiles().smooth(8);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

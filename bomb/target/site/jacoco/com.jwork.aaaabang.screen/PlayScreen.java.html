@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PlayScreen.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">bomb</a> &gt; <a href="index.source.html" class="el_package">com.jwork.aaaabang.screen</a> &gt; <span class="el_source">PlayScreen.java</span></div><h1>PlayScreen.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2015 Aeranythe Echosong
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
+package com.jwork.aaaabang.screen;
+
+
+
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
+
+
+import javax.xml.namespace.QName;
+
+import com.jwork.aaaabang.asciiPanel.AsciiPanel;
+import com.jwork.aaaabang.configuration.*;
+import com.jwork.aaaabang.world.*;
+import java.io.*;
+
+
+
+
+/**
+ *
+ * @author Aeranythe Echosong
+ */
+public class PlayScreen implements Screen {
+
+    private World world;
+    private Player player;
+    private int screenWidth;
+    private int screenHeight;
+    private List&lt;String&gt; messages;
+    private List&lt;String&gt; oldMessages;
+
+<span class="fc" id="L52">    public PlayScreen(int keyType) {</span>
+<span class="fc" id="L53">        this.screenWidth = Configure.GameSize;</span>
+<span class="fc" id="L54">        this.screenHeight = Configure.GameSize;</span>
+        
+<span class="fc" id="L56">        this.messages = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L57">        this.oldMessages = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L58">        createWorld();</span>
+<span class="pc bpc" id="L59" title="1 of 3 branches missed.">        switch (keyType) {</span>
+            case KeyEvent.VK_ENTER:
+<span class="fc" id="L61">                newGame();</span>
+<span class="fc" id="L62">                break;</span>
+            case KeyEvent.VK_SPACE:
+<span class="fc" id="L64">                loadGame();</span>
+                break;
+        }
+        
+<span class="fc" id="L68">    }</span>
+    private void loadGame(){
+<span class="fc" id="L70">        try(</span>
+            // 创建一个ObjectInputStream输入流
+<span class="fc" id="L72">            ObjectInputStream ois = new ObjectInputStream(</span>
+                new FileInputStream(&quot;object.txt&quot;)))
+        {
+            // 从输入流中读取一个Java对象，并将其强制类型转换为World类
+<span class="fc" id="L76">            this.world = (World)ois.readObject();</span>
+<span class="fc" id="L77">            player = world.getPlayer();</span>
+<span class="fc" id="L78">            ExecutorService exec = Executors.newCachedThreadPool();</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">            for(Creature c : world.getCreatures()){</span>
+                try {
+<span class="fc" id="L81">                    TimeUnit.MILLISECONDS.sleep(500);</span>
+<span class="nc" id="L82">                } catch (InterruptedException e) {</span>
+<span class="nc" id="L83">                    e.printStackTrace();</span>
+<span class="fc" id="L84">                }</span>
+<span class="fc" id="L85">                exec.execute(c);</span>
+<span class="fc" id="L86">            }</span>
+
+        }
+<span class="nc" id="L89">        catch (Exception ex)</span>
+        {
+<span class="nc" id="L91">            ex.printStackTrace();</span>
+<span class="fc" id="L92">        }</span>
+<span class="fc" id="L93">    }</span>
+    private void newGame(){
+       
+        
+<span class="fc" id="L97">        CreatureFactory creatureFactory = new CreatureFactory(this.world);</span>
+<span class="fc" id="L98">        createCreatures(creatureFactory);</span>
+<span class="fc" id="L99">    }</span>
+
+    private void createCreatures(CreatureFactory creatureFactory) {
+<span class="fc" id="L102">        this.player = creatureFactory.newPlayer(this.messages);</span>
+<span class="fc" id="L103">        this.world.setPlayer(this.player);</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        for (int i = 0; i &lt; Configure.monstersCnt; i++) {</span>
+<span class="fc" id="L105">            creatureFactory.newFungus();</span>
+            try {
+<span class="fc" id="L107">                TimeUnit.MILLISECONDS.sleep(500);</span>
+<span class="nc" id="L108">            } catch (InterruptedException e) {</span>
+<span class="nc" id="L109">                e.printStackTrace();</span>
+<span class="fc" id="L110">            }</span>
+        }
+<span class="fc" id="L112">    }</span>
+
+    private void createWorld() {
+<span class="fc" id="L115">        world = new WorldBuilder(this.screenWidth, this.screenHeight).makeCaves().build();</span>
+<span class="fc" id="L116">    }</span>
+
+    private void displayTiles(AsciiPanel terminal, int left, int top) {
+        // Show terrain
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        for (int x = 0; x &lt; screenWidth; x++) {</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            for (int y = 0; y &lt; screenHeight; y++) {</span>
+<span class="nc" id="L122">                int wx = x + left;</span>
+<span class="nc" id="L123">                int wy = y + top;</span>
+
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                if (player.canSee(wx, wy)) {</span>
+<span class="nc" id="L126">                    terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));</span>
+                } else {
+<span class="nc" id="L128">                    terminal.write((char)0, x, y, Color.DARK_GRAY);</span>
+                }
+            }
+        }
+
+        
+
+        // Show creatures
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        for (Creature creature : world.getCreatures()) {</span>
+<span class="nc bnc" id="L137" title="All 6 branches missed.">            if (creature.x() &gt;= left &amp;&amp; creature.x() &lt; left + screenWidth &amp;&amp; creature.y() &gt;= top</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">                    &amp;&amp; creature.y() &lt; top + screenHeight) {</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                if (player.canSee(creature.x(), creature.y())) {</span>
+<span class="nc" id="L140">                    terminal.write(creature.glyph(), creature.x() - left, creature.y() - top, creature.color());</span>
+                }
+            }
+<span class="nc" id="L143">        }</span>
+        
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        for(Bomb bomb: world.getBombs()) {</span>
+<span class="nc" id="L146">            terminal.write(bomb.glyph(), bomb.x() - left, bomb.y() - top, bomb.color());</span>
+<span class="nc" id="L147">        }</span>
+
+        // Creatures can choose their next action now
+<span class="nc" id="L150">        world.update();</span>
+<span class="nc" id="L151">    }</span>
+
+    private void displayMessages(AsciiPanel terminal, List&lt;String&gt; messages) {
+        
+<span class="nc" id="L155">        int top = this.screenHeight ;</span>
+<span class="nc" id="L156">        int index = messages.size()-1;</span>
+        
+<span class="nc bnc" id="L158" title="All 2 branches missed.">        if(index &gt;= 0)</span>
+<span class="nc" id="L159">            terminal.write(messages.get(index), 1, top + 2);</span>
+        
+        //this.oldMessages.addAll(messages);
+        //messages.clear();
+<span class="nc" id="L163">    }</span>
+
+    @Override
+    public void displayOutput(AsciiPanel terminal) {
+        // Terrain and creatures
+<span class="nc" id="L168">        displayTiles(terminal, getScrollX(), getScrollY());</span>
+        // Player
+<span class="nc" id="L170">        terminal.write(player.glyph(), player.x() - getScrollX(), player.y() - getScrollY(), player.color());</span>
+        // Stats
+<span class="nc" id="L172">        String stats = String.format(&quot;%3d/%3d hp&quot;, player.hp(), player.maxHP());</span>
+<span class="nc" id="L173">        terminal.write(stats, 1, this.screenHeight+1);</span>
+        // Messages
+<span class="nc" id="L175">        displayMessages(terminal, this.messages);</span>
+<span class="nc" id="L176">    }</span>
+
+    @Override
+    public Screen respondToUserInput(KeyEvent key) {
+<span class="nc" id="L180">        int flag = 0;</span>
+<span class="nc bnc" id="L181" title="All 7 branches missed.">        switch (key.getKeyCode()) {</span>
+            case KeyEvent.VK_LEFT:
+<span class="nc" id="L183">                flag = player.moveBy(-1, 0);</span>
+<span class="nc" id="L184">                break;</span>
+            case KeyEvent.VK_RIGHT:
+<span class="nc" id="L186">                flag = player.moveBy(1, 0);</span>
+<span class="nc" id="L187">                break;</span>
+            case KeyEvent.VK_UP:
+<span class="nc" id="L189">                flag = player.moveBy(0, -1);</span>
+<span class="nc" id="L190">                break;</span>
+            case KeyEvent.VK_DOWN:
+<span class="nc" id="L192">                flag = player.moveBy(0, 1);</span>
+<span class="nc" id="L193">                break;</span>
+            case KeyEvent.VK_SPACE:
+<span class="nc" id="L195">                player.putBomb();</span>
+<span class="nc" id="L196">                break;</span>
+            case KeyEvent.VK_ENTER:
+<span class="nc" id="L198">                saveGame();</span>
+            
+        }
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        if(flag == 1){    </span>
+<span class="nc" id="L202">            return new WinScreen();</span>
+        }
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        else if(flag == -1){</span>
+<span class="nc" id="L205">            return new LoseScreen();</span>
+        }
+        else{
+<span class="nc" id="L208">            return this;</span>
+        }
+    }
+
+    public void saveGame(){
+<span class="fc" id="L213">        try(</span>
+            // 创建一个ObjectOutputStream输出流
+<span class="fc" id="L215">            ObjectOutputStream oos = new ObjectOutputStream(</span>
+                new FileOutputStream(&quot;object.txt&quot;)))
+        {
+            // 将player对象写入输出流
+            //oos.writeObject(player);
+<span class="fc" id="L220">            oos.writeObject(world);</span>
+        }
+<span class="nc" id="L222">        catch (IOException ex)</span>
+        {
+<span class="nc" id="L224">            ex.printStackTrace();</span>
+<span class="fc" id="L225">        }</span>
+<span class="fc" id="L226">    }</span>
+
+    public int getScrollX() {
+<span class="nc" id="L229">        return Math.max(0, Math.min(player.x() - screenWidth / 2, world.width() - screenWidth));</span>
+    }
+
+    public int getScrollY() {
+<span class="nc" id="L233">        return Math.max(0, Math.min(player.y() - screenHeight / 2, world.height() - screenHeight));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

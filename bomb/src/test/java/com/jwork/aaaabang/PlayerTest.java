@@ -38,7 +38,7 @@ public class PlayerTest
 
         world = new World(tiles);
         this.messages = new ArrayList<String>();
-        this.player = new Player(this.world, (char)2, Configure.playeColor, 100, 0, 5, 9,messages);
+        this.player = new Player(this.world, (char)2, Configure.playerColor, 100, 0, 5, 9,messages);
         world.setPlayer(player);
         
 

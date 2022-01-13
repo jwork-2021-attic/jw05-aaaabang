@@ -387,10 +387,10 @@ public class AsciiPanel extends JPanel {
 
     private void loadGlyphs() {
         try {
-            //System.out.println(terminalFontFile);
+            ////System.out.println(terminalFontFile);
 <span class="nc" id="L391">            glyphSprite = ImageIO.read(AsciiPanel.class.getClassLoader().getResource(terminalFontFile));</span>
 <span class="nc" id="L392">        } catch (IOException e) {</span>
-<span class="nc" id="L393">            System.err.println(&quot;loadGlyphs(): &quot; + e.getMessage());</span>
+<span class="nc" id="L393">            //System.err.println(&quot;loadGlyphs(): &quot; + e.getMessage());</span>
 <span class="nc" id="L394">        }</span>
 
 <span class="nc bnc" id="L396" title="All 2 branches missed.">        for (int i = 0; i &lt; 256; i++) {</span>

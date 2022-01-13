@@ -6,7 +6,7 @@ import java.util.Random;
 import com.jwork.aaaabang.asciiPanel.AsciiPanel;
 public class Configure {
     public static long refreshTime = 50;//MILLISECONDS
-    public static int GameSize = 30;
+    public static int GameSize = 25;
 
     public static int worldWidth = 50;
     public static int worldHeight = 50;
@@ -20,9 +20,9 @@ public class Configure {
     public static Color player1Color = AsciiPanel.brightBlue;
     public static Color player2Color = AsciiPanel.brightRed;
 
-    public static int monstersCnt = 5;
+    public static int monstersCnt = 4;
     public static Color monsterColor = AsciiPanel.cyan;
-    public static double monsterSpeed = 0.5;//Senconds
+    public static double monsterSpeed = 1.4;//Senconds
     public static int monsterHp = 10;
 
     public static int bombAttack = 10;
@@ -32,7 +32,7 @@ public class Configure {
 
     public static int[] generateSeed(){
         for (int i = 0; i < 8; i++) {
-            seeds[i] = new Random().nextInt(1234);
+            seeds[i] = new Random().nextInt(45656);
         }
         return seeds;
     }

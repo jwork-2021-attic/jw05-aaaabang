@@ -146,19 +146,19 @@ public class Monster extends Creature{
         switch(res){
             case 0:
                 this.moveBy(-1, 0);
-                //System.out.println(this + " move: " + "left");
+                ////System.out.println(this + " move: " + "left");
                 break;    
             case 1:
                 this.moveBy(1, 0);
-                //System.out.println(this + " move: " + "right");
+                ////System.out.println(this + " move: " + "right");
                 break;
             case 2:
                 this.moveBy(0, -1);
-                //System.out.println(this + " move: " + "up");
+                ////System.out.println(this + " move: " + "up");
                 break;
             case 3:
                 this.moveBy(0, 1);
-                //System.out.println(this + " move: " + "down");
+                ////System.out.println(this + " move: " + "down");
                 break;
         }
     }

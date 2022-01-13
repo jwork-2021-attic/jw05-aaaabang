@@ -31,7 +31,7 @@ public class Client implements Runnable{
         buffer = ByteBuffer.allocate(1024);
         hostAddress = new InetSocketAddress("localhost", 9001);
         clientChannel = SocketChannel.open(hostAddress);
-        System.out.println("Client... connected");
+        //System.out.println("Client... connected");
         // clientChannel = SocketChannel.open();
         // clientChannel.configureBlocking(false);
         // connected = clientChannel.connect(hostAddress);
@@ -51,7 +51,7 @@ public class Client implements Runnable{
         numRead = clientChannel.read(buffer);
         
         if (numRead == 0 || numRead == -1) {
-            System.out.println("Client Read Nothing");
+            ////System.out.println("Client Read Nothing");
             return;
         }
 
@@ -81,7 +81,7 @@ public class Client implements Runnable{
         }else if(temp[0].equals("Action")){
             int id = Integer.parseInt(temp[1]);
             int keyCode = Integer.parseInt(temp[2]);
-            System.out.println("ID: " + id + " Keycode:"+keyCode);
+            //System.out.println("ID: " + id + " Keycode:"+keyCode);
             playScreen.playerAction(id,keyCode);
         }
     }
@@ -93,7 +93,7 @@ public class Client implements Runnable{
     public void start(){
         
         while (id == -1 || seeds == null) {
-            System.out.println("Client... started");
+            //System.out.println("Client... started");
             try {
                 read();
                 //write("Ask for seed:");

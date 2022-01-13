@@ -99,13 +99,13 @@ public class PlayScreen implements Screen {
         Player player3 = creatureFactory.newPlayer(2);
         players = world.getPlayers();
         //生成怪兽
-        new Thread(new Runnable() {
-            public void run(){
-                createMonsters(creatureFactory);
-            }
-        }).start();
-
-        numClient = client.getNumClient();
+        // new Thread(new Runnable() {
+        //     public void run(){
+        //         createMonsters(creatureFactory);
+        //     }
+        // }).start();
+        createMonsters(creatureFactory);
+        //numClient = client.getNumClient();
     }
 
     private void loadGame(){
@@ -217,7 +217,7 @@ public class PlayScreen implements Screen {
         if(multiple == false || numClient >= 3){
             if(startGame() && multiple){
                 player = players.get(client.getID());
-                System.out.println("id:" + client.getID());
+                //System.out.println("id:" + client.getID());
             }
             
             // Terrain and creatures
@@ -231,7 +231,7 @@ public class PlayScreen implements Screen {
             displayMessages(terminal, this.messages);
         }
         else{
-            terminal.write("Please wait for all other players to load in...",5,10);
+            terminal.write("Please wait for all other players to load in...",2,10);
             numClient = client.getNumClient();
         }
     }
@@ -254,7 +254,8 @@ public class PlayScreen implements Screen {
         int flag = 0;
         int id = client.getID();
         String msg = new String();
-        msg = "Action:" + id + ":" + key.getKeyCode();
+        msg = "Action:" + id + ":" + key.getKeyCode()+ ":";
+        System.out.println(msg);
         client.write(msg);
 
         return this;
@@ -266,23 +267,23 @@ public class PlayScreen implements Screen {
         switch (keyCode) {
             case KeyEvent.VK_LEFT:
                 flag = player1.moveBy(-1, 0);
-                System.out.println(id + "move left");
+                //System.out.println(id + "move left");
                 break;
             case KeyEvent.VK_RIGHT:
                 flag = player1.moveBy(1, 0);
-                System.out.println(id + "move right");
+                //System.out.println(id + "move right");
                 break;
             case KeyEvent.VK_UP:
                 flag = player1.moveBy(0, -1);
-                System.out.println(id + "move up");
+                //System.out.println(id + "move up");
                 break;
             case KeyEvent.VK_DOWN:
                 flag = player1.moveBy(0, 1);
-                System.out.println(id + "move down");
+                //System.out.println(id + "move down");
                 break;
             case KeyEvent.VK_SPACE:
                 player1.putBomb();
-                System.out.println(id + "put bomb");
+                //System.out.println(id + "put bomb");
                 break;
             
         }

@@ -41,7 +41,7 @@ public class Server implements Runnable{
 
     @Override
     public void run(){
-        System.out.println("Sever is running");
+        //System.out.println("Sever is running");
         while (true) {
             
             int readyCount;
@@ -95,7 +95,7 @@ public class Server implements Runnable{
         if (numRead == -1) { // 如果没读取到
             Socket socket = channel.socket();
             SocketAddress remoteAddr = socket.getRemoteSocketAddress();
-            System.out.println("Connection closed by client: " + remoteAddr);
+            //System.out.println("Connection closed by client: " + remoteAddr);
             channel.close();
             key.cancel();
             return;
@@ -112,15 +112,15 @@ public class Server implements Runnable{
 
     private void parseInfo(String info) throws IOException {
         String[] temp = info.split(":");
-        //System.out.println("HandleInfo:" + info);
+        ////System.out.println("HandleInfo:" + info);
         if (temp[0].equals("Ask for seed")) { // 建立连接时，发送numClient
             String msg = new String();
-            //System.out.println("first:" + msg);
+            ////System.out.println("first:" + msg);
             msg = "Seeds:";
             for(int i = 0;i < 8;i++){
                 msg += seeds[i] + ":";
             }
-            //System.out.println("second:" + msg);
+            System.out.println("seeds:" + msg);
             byte[] data = msg.getBytes();
             writeToAll(data);
         } else { // 连接已建立，发送操作
@@ -130,13 +130,13 @@ public class Server implements Runnable{
     }
 
     private void accept(SelectionKey key) throws IOException{
-        System.out.println("receive client");
+        //System.out.println("receive client");
         ServerSocketChannel serverChannel = (ServerSocketChannel) key.channel();
         SocketChannel channel = serverChannel.accept();
         channel.configureBlocking(false);
         Socket socket = channel.socket();
         SocketAddress remoteAddr = socket.getRemoteSocketAddress();
-        System.out.println("Connected to: " + remoteAddr);
+        //System.out.println("Connected to: " + remoteAddr);
 
         /*
          * Register channel with selector for further IO (record it for read/write
@@ -162,7 +162,7 @@ public class Server implements Runnable{
     private void writeToAll(byte[] data) throws IOException{
         Set<SelectionKey> allKeys = selector.keys();
         Iterator iterator = allKeys.iterator();
-        // System.out.println(allKeys.size());
+        // //System.out.println(allKeys.size());
         SelectionKey key = (SelectionKey) iterator.next();
         write(key, data);
 

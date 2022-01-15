@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jwork.aaaabang.PlayerTest" time="0.619" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jwork.aaaabang.PlayerTest" time="0.504" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
-    <property name="socksProxyHost" value="127.0.0.1"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value=""/>
@@ -18,7 +17,7 @@
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire/surefirebooter8010143898727705086.jar /Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire 2022-01-16T01-35-56_526-jvmRun1 surefire5815474779680420763tmp surefire_02667135272522993667tmp"/>
+    <property name="sun.java.command" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire/surefirebooter1204690030502420637.jar /Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire 2022-01-16T02-19-42_989-jvmRun1 surefire9171567562195191806tmp surefire_02934109094006025090tmp"/>
     <property name="surefire.test.class.path" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/test-classes:/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/classes:/Users/aaaabang/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/aaaabang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/aaaabang"/>
@@ -31,7 +30,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire/surefirebooter8010143898727705086.jar"/>
+    <property name="surefire.real.class.path" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire/surefirebooter1204690030502420637.jar"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="1.8.0_231-b11"/>
@@ -48,7 +47,6 @@
     <property name="java.version" value="1.8.0_231"/>
     <property name="user.dir" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb"/>
     <property name="os.arch" value="x86_64"/>
-    <property name="socksProxyPort" value="1081"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="sun.os.patch.level" value="unknown"/>
@@ -60,7 +58,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testBomb" classname="com.jwork.aaaabang.PlayerTest" time="0.556"/>
+  <testcase name="testBomb" classname="com.jwork.aaaabang.PlayerTest" time="0.413"/>
   <testcase name="testMove" classname="com.jwork.aaaabang.PlayerTest" time="0"/>
-  <testcase name="testGetAttacked" classname="com.jwork.aaaabang.PlayerTest" time="0.006"/>
+  <testcase name="testGetAttacked" classname="com.jwork.aaaabang.PlayerTest" time="0"/>
 </testsuite>

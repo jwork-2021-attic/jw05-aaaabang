@@ -54,6 +54,9 @@ public class Player extends Creature {
     public void run(){
     }
 
+    public void setWorld(World world){
+        Creature.world = world;
+    }
     @Override
     public synchronized int moveBy(int mx, int my) {
         Tile tile = world.tile(x + mx, y + my);

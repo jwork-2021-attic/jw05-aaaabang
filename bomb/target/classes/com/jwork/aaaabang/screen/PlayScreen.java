@@ -118,15 +118,16 @@ public class PlayScreen implements Screen {
             // 从输入流中读取一个Java对象，并将其强制类型转换为World类
             this.world = (World)ois.readObject();
             player = world.getPlayer();
-            ExecutorService exec = Executors.newCachedThreadPool();
-            for(Creature c : world.getCreatures()){
-                try {
-                    TimeUnit.MILLISECONDS.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                exec.execute(c);
-            }
+            player.setWorld(world);
+            // ExecutorService exec = Executors.newCachedThreadPool();
+            // for(Creature c : world.getCreatures()){
+            //     try {
+            //         TimeUnit.MILLISECONDS.sleep(500);
+            //     } catch (InterruptedException e) {
+            //         e.printStackTrace();
+            //     }
+            //     exec.execute(c);
+            // }
 
         }
         catch (Exception ex)

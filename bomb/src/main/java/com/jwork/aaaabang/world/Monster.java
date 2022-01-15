@@ -61,7 +61,7 @@ public class Monster extends Creature{
         while(hp > 1){
             
             try {
-                Point playerPos = isSeePlayer();
+                Point playerPos = null;//isSeePlayer();
                 if(playerPos == null)
                     randomStep();
                 else

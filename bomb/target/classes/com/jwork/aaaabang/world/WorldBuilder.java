@@ -55,7 +55,7 @@ public class WorldBuilder {
                     tiles[width][height] = Tile.FLOOR;
             }
         }
-
+        tiles[width-2][height-2] = Tile.GOAL;
         return new World(tiles);
     }
     private WorldBuilder randomizeTiles() {

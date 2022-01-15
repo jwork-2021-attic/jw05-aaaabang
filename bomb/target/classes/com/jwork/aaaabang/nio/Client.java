@@ -18,7 +18,8 @@ public class Client implements Runnable{
     private int numClient;
     private int[] seeds;
     boolean connected;
-    
+    int winSign;
+
     InetSocketAddress hostAddress;
     SocketChannel clientChannel;
     private ByteBuffer buffer;
@@ -27,6 +28,7 @@ public class Client implements Runnable{
         this.playScreen = playScreen;
         this.id = -1;//还未确认编号的客户端
         numClient = -1;
+        winSign = 0;
 
         buffer = ByteBuffer.allocate(1024);
         hostAddress = new InetSocketAddress("localhost", 9001);
@@ -82,10 +84,13 @@ public class Client implements Runnable{
             int id = Integer.parseInt(temp[1]);
             int keyCode = Integer.parseInt(temp[2]);
             //System.out.println("ID: " + id + " Keycode:"+keyCode);
-            playScreen.playerAction(id,keyCode);
+            this.winSign = playScreen.playerAction(id,keyCode);
         }
     }
 
+    public int getWinSign(){
+        return winSign;
+    }
     public  int getNumClient(){
         return numClient;
     }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jwork.aaaabang.ScreenTest" time="12.726" tests="2" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.jwork.aaaabang.ScreenTest" time="0.101" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="gopherProxySet" value="false"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
+    <property name="socksProxyHost" value="127.0.0.1"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value=""/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/test-classes:/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/classes:/Users/aaaabang/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/aaaabang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="java.class.path" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/test-classes:/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/classes:/Users/aaaabang/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/aaaabang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
@@ -17,20 +18,20 @@
     <property name="user.country" value="CN"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib"/>
-    <property name="sun.java.command" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire/surefirebooter7177701508552131467.jar /Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire 2022-01-08T17-05-59_792-jvmRun1 surefire2000897925871913584tmp surefire_05359665501337592243tmp"/>
-    <property name="surefire.test.class.path" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/test-classes:/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/classes:/Users/aaaabang/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/aaaabang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
+    <property name="sun.java.command" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire/surefirebooter8010143898727705086.jar /Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire 2022-01-16T01-35-56_526-jvmRun1 surefire5815474779680420763tmp surefire_02667135272522993667tmp"/>
+    <property name="surefire.test.class.path" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/test-classes:/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/classes:/Users/aaaabang/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/aaaabang/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="/Users/aaaabang"/>
     <property name="user.language" value="zh"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre"/>
-    <property name="basedir" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb"/>
+    <property name="basedir" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb"/>
     <property name="file.separator" value="/"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb/target/surefire/surefirebooter7177701508552131467.jar:/Users/aaaabang/.m2/repository/org/jacoco/org.jacoco.agent/0.8.2/org.jacoco.agent-0.8.2-runtime.jar"/>
+    <property name="surefire.real.class.path" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb/target/surefire/surefirebooter8010143898727705086.jar"/>
     <property name="sun.boot.class.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/classes"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="1.8.0_231-b11"/>
@@ -45,19 +46,20 @@
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="java.io.tmpdir" value="/var/folders/ll/lpm810256vj60st_bkp2_2vc0000gn/T/"/>
     <property name="java.version" value="1.8.0_231"/>
-    <property name="user.dir" value="/Users/aaaabang/Documents/jw05-aaaabang/bomb"/>
+    <property name="user.dir" value="/Users/aaaabang/Documents/java/jw05-aaaabang/bomb"/>
     <property name="os.arch" value="x86_64"/>
+    <property name="socksProxyPort" value="1081"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.lwawt.macosx.CPrinterJob"/>
     <property name="sun.os.patch.level" value="unknown"/>
-    <property name="java.library.path" value="/Users/aaaabang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:///System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.library.path" value="/Users/aaaabang/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="java.vm.version" value="25.231-b11"/>
-    <property name="java.ext.dirs" value="/Users/aaaabang/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:///System/Library/Java/Extensions:/usr/lib/java"/>
+    <property name="java.ext.dirs" value="/Users/aaaabang/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
     <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testSave" classname="com.jwork.aaaabang.ScreenTest" time="8.673"/>
-  <testcase name="testScreen" classname="com.jwork.aaaabang.ScreenTest" time="4.045"/>
+  <testcase name="testSave" classname="com.jwork.aaaabang.ScreenTest" time="0.097"/>
+  <testcase name="testScreen" classname="com.jwork.aaaabang.ScreenTest" time="0.003"/>
 </testsuite>

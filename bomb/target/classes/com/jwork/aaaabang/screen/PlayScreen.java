@@ -258,7 +258,16 @@ public class PlayScreen implements Screen {
         System.out.println(msg);
         client.write(msg);
 
-        return this;
+        flag = client.getWinSign();
+        if(flag == 1){    
+            return new WinScreen();
+        }
+        else if(flag == -1){
+            return new LoseScreen();
+        }
+        else{
+            return this;
+        }
     }
 
     public int playerAction(int id,int keyCode){
